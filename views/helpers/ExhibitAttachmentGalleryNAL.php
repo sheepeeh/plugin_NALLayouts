@@ -28,6 +28,11 @@ class NALLayouts_View_Helper_ExhibitAttachmentGalleryNAL extends Zend_View_Helpe
             $html .= '<div class="exhibit-item exhibit-gallery-item">';
             $html .= '<div class="gallery-item-title">';
             $html .= metadata($item, array("Dublin Core", "Title"));
+
+
+            if (metadata($item, array("Dublin Core", "Date"))) { $html .= '<span class="exhibit-item-date"> (' . metadata($item, array("Dublin Core", "Date")) . ')</span>'; }
+            
+
             $html .= '</div>';
             $html .= $this->view->exhibitAttachment($attachment, $fileOptions, $linkProps, true);
             $html .= '</div>';
