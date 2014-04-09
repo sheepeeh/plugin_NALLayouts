@@ -1,0 +1,1 @@
+Plugin for Omeka that adds custom layouts to Exhibit Builder 3.0
