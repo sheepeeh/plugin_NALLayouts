@@ -27,7 +27,7 @@ class NALLayouts_View_Helper_ExhibitAttachmentGalleryNAL extends Zend_View_Helpe
             $item = $attachment->getItem();
             $html .= '<div class="exhibit-item exhibit-gallery-item">';
             $html .= '<div class="gallery-item-title">';
-            $html .= metadata($item, array("Dublin Core", "Title"));
+            $html .= metadata($item, array("Dublin Core", "Title"), array('snippet'=>100));
 
 
             if (metadata($item, array("Dublin Core", "Date"))) { $html .= '<span class="exhibit-item-date"> (' . metadata($item, array("Dublin Core", "Date")) . ')</span>'; }
