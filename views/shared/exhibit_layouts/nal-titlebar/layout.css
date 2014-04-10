@@ -1,4 +1,4 @@
-.gallery-item-title {
+.layout-nal-titlebar .gallery-item-title {
     font-variant: small-caps;
     color:#036;
     font-size: 18px;
@@ -6,19 +6,19 @@
     margin:5px 0px 0px 10px;
 }
 
-.exhibit-gallery-item img {
+.layout-nal-titlebar .exhibit-gallery-item img {
     max-width:100px;
     max-height:100px;
 }
 
-.exhibit-item-link img {
+.layout-nal-titlebar .exhibit-item-link img {
     border: 5px solid #036;
     margin-top: 5px;
     margin-left: 3px;
     box-shadow:none !important;
 }
 
-.exhibit-item-link {
+.layout-nal-titlebar .exhibit-item-link {
     vertical-align: bottom;
     display: block;
     float: left;
@@ -28,7 +28,7 @@
     box-shadow:none;
 }
 
-.exhibit-item-caption {
+.layout-nal-titlebar .exhibit-item-caption {
     font-size: 0.8em;
     margin-bottom: 1.2em !important;
     width: 835px;
@@ -41,12 +41,12 @@
 }
 
 
-.exhibit-item-caption h3 {
+.layout-nal-titlebar .exhibit-item-caption h3 {
     font-variant:small-caps;
     margin-top:0px;
 }
 
-.exhibit-item-date {
+.layout-nal-titlebar .exhibit-item-date {
     font-variant:none;
     font-size:16px;
 }
