@@ -18,15 +18,14 @@ $galleryPosition = isset($options['gallery-position'])
 <div class="gallery <?php if ($showcaseFile || !empty($text)) echo "with-showcase $galleryPosition"; ?>">
   <?php foreach ($attachments as $attachment): ?>
             <?php $item = $attachment->getItem(); ?>
+			<?php $file = $attachment->getFile(); ?>
             <div class="exhibit-item exhibit-gallery-item">
-            <div class="gallery-item-title">
+            <?php echo file_markup($file,array('imageSize'=>'square_thumbnail')); ?>
+			<div class="gallery-item-title">
             <?php echo metadata($item, array("Dublin Core", "Title"), array('snippet'=>100)); ?>
-
             <?php if (metadata($item, array("Dublin Core", "Date"))) { $html .= '<span class="exhibit-item-date"> (' . metadata($item, array("Dublin Core", "Date")) . ')</span>'; } ?>
-            
-
            </div>
-            <?php echo $this->exhibitAttachment($attachment); ?>
+			<?php echo $attachment['caption'] ?>
             </div>
 			<?php endforeach; ?>
     </div>
