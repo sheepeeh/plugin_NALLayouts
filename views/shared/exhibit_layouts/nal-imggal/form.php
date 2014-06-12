@@ -43,7 +43,7 @@ $options = $block->getOptions();
             )
         );
         ?>
-        <p class="instructions"><?php echo __('If there is no showcase file or text, the gallery will use the full width of the page.'); ?></p>
+        <p class="instructions"><?php echo __('If there is no showcase file the gallery will use the full width of the page.'); ?></p>
     </div>
     
 </div>

@@ -15,7 +15,8 @@ $galleryPosition = isset($options['gallery-position'])
     ?>
 </div>
 <?php endif; ?>
-<div class="gallery <?php if ($showcaseFile || !empty($text)) echo "with-showcase $galleryPosition"; ?>">
+<?php echo $text; ?>
+<div class="gallery <?php if ($showcaseFile) echo "with-showcase $galleryPosition"; ?>">
   <?php foreach ($attachments as $attachment): ?>
             <?php $item = $attachment->getItem(); ?>
 			<?php $file = $attachment->getFile(); ?>
@@ -29,5 +30,5 @@ $galleryPosition = isset($options['gallery-position'])
             </div>
 			<?php endforeach; ?>
     </div>
-<?php echo $text; ?>
+
 
