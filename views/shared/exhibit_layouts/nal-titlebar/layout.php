@@ -22,7 +22,7 @@ $galleryPosition = isset($options['gallery-position'])
             <div class="gallery-item-title">
             <?php echo metadata($item, array("Dublin Core", "Title"), array('snippet'=>100)); ?>
 
-            <?php if (metadata($item, array("Dublin Core", "Date"))) { $html .= '<span class="exhibit-item-date"> (' . metadata($item, array("Dublin Core", "Date")) . ')</span>'; } ?>
+            <?php if (metadata($item, array("Dublin Core", "Date"))) { echo '<span class="exhibit-item-date"> (' . metadata($item, array("Dublin Core", "Date")) . ')</span>'; } ?>
             
 
            </div>
