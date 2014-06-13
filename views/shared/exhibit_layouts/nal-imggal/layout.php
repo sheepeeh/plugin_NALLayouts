@@ -15,20 +15,26 @@ $galleryPosition = isset($options['gallery-position'])
     ?>
 </div>
 <?php endif; ?>
-<?php echo $text; ?>
-<div class="gallery <?php if ($showcaseFile) echo "with-showcase $galleryPosition"; ?>">
+<div class="gallery <?php if ($showcaseFile || !empty($text)) echo "with-showcase $galleryPosition"; ?>">
+  <?php $count = 0; ?>
   <?php foreach ($attachments as $attachment): ?>
-            <?php $item = $attachment->getItem(); ?>
-			<?php $file = $attachment->getFile(); ?>
-            <div class="exhibit-item exhibit-gallery-item">
-            <?php echo file_markup($file,array('imageSize'=>'thumbnail')); ?>
-			<div class="gallery-item-title">
-            <?php echo "<a href=".exhibit_builder_exhibit_item_uri($item).">".metadata($item, array("Dublin Core", "Title"), array('snippet'=>100))."</a>"; ?>
-            <?php if (metadata($item, array("Dublin Core", "Date"))) { echo '<span class="exhibit-item-date"> (' . metadata($item, array("Dublin Core", "Date")) . ')</span>'; } ?>
-           </div>
-			<?php echo $attachment['caption'] ?>
-            </div>
-			<?php endforeach; ?>
+            <?php if ($count < 4): ?>
+                <?php $item = $attachment->getItem(); ?>
+                <?php $file = $attachment->getFile(); ?>
+                <div class="exhibit-item exhibit-gallery-item">
+                <?php echo file_markup($file,array('imageSize'=>'thumbnail')); ?>
+                <div class="exhibit-item-title">
+                <?php echo "<a href=".exhibit_builder_exhibit_item_uri($item).">".metadata($item, array("Dublin Core", "Title"), array('snippet'=>100))."</a>"; ?>
+                <?php if (metadata($item, array("Dublin Core", "Date"))) { echo '<span class="exhibit-item-date"> (' . metadata($item, array("Dublin Core", "Date")) . ')</span>'; } ?>
+               </div>
+                <?php echo $attachment['caption'] ?>
+                </div>
+                <?php $count = $count + 1; ?>
+            <?php else: ?>
+                <div class="break-row"></div>
+                <?php $count = 0; ?>
+            <?php endif; ?>
+        <?php endforeach; ?>
     </div>
-
+<?php echo $text; ?>
 

@@ -56,9 +56,10 @@
 }
 
 .layout-nal-imggal .exhibit-item {
-    display: inline-block;
+    display: table-cell;
     vertical-align: top;
     margin-bottom: 1.25%;
+    padding:10px !important;
 }
 
 .layout-nal-imggal .gallery-showcase.left.with-right +
@@ -85,4 +86,16 @@
 .layout-nal-imggal .exhibit-item-caption p {
     margin: 0 0 2% 0;
     clear: both;
+}
+
+.layout-nal-imggal {
+    width:100%;
+    text-align:center;
+    display:table-row;
+}
+
+.layout-nal-imggal .exhibit-item-title {
+    margin: 0 0 2% 0;
+    clear: both;
+    font-variant:small-caps;
 }
