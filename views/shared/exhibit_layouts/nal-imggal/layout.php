@@ -23,7 +23,7 @@ $galleryPosition = isset($options['gallery-position'])
             <div class="exhibit-item exhibit-gallery-item">
             <?php echo file_markup($file,array('imageSize'=>'thumbnail')); ?>
 			<div class="gallery-item-title">
-            <?php echo metadata($item, array("Dublin Core", "Title"), array('snippet'=>100)); ?>
+            <?php echo "<a href=".exhibit_builder_exhibit_item_uri($item).">".metadata($item, array("Dublin Core", "Title"), array('snippet'=>100))."</a>"; ?>
             <?php if (metadata($item, array("Dublin Core", "Date"))) { echo '<span class="exhibit-item-date"> (' . metadata($item, array("Dublin Core", "Date")) . ')</span>'; } ?>
            </div>
 			<?php echo $attachment['caption'] ?>
