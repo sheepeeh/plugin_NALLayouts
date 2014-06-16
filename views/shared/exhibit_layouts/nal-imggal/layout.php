@@ -20,9 +20,11 @@ $galleryPosition = isset($options['gallery-position'])
   <?php foreach ($attachments as $attachment): ?>
         <?php $item = $attachment->getItem(); ?>
         <?php $file = $attachment->getFile(); ?>
-      
+      <?php if ($counter == 0): ?>
+        <div id="imggal-row">
+    <?php endif; ?>
             <?php $counter++; ?>
-            <div class="exhibit-item exhibit-gallery-item">
+             <div class="exhibit-item exhibit-gallery-item">
             <?php echo file_markup($file,array('imageSize'=>'thumbnail')); ?>
             <div class="exhibit-item-title">
             <?php echo "<a href=".exhibit_builder_exhibit_item_uri($item).">".metadata($item, array("Dublin Core", "Title"), array('snippet'=>100))."</a>"; ?>
@@ -32,7 +34,9 @@ $galleryPosition = isset($options['gallery-position'])
             </div>
          
             <?php if ($counter % 4 == 0 && $attachment != end($attachments)): ?>
+                </div>
                 <span class="break-row"></span>
+                <div id="imggal-row">
             <?php endif; ?>
 
 

@@ -21,6 +21,23 @@
     margin-right: 0;
 }
 
+.layout-nal-imggal #imggal-row .exhibit-item:first-child:nth-last-child(2),
+.layout-nal-imggal #imggal-row .exhibit-item:first-child:nth-last-child(2) ~ .exhibit-item {
+    display:inline-block;
+}
+
+.layout-nal-imggal #imggal-row .exhibit-item:first-child:nth-last-child(3),
+.layout-nal-imggal #imggal-row .exhibit-item:first-child:nth-last-child(3) ~ .exhibit-item {
+    display:inline-block;
+}
+
+.layout-nal-imggal #imggal-row .exhibit-item:first-child:nth-last-child(1),
+.layout-nal-imggal #imggal-row .exhibit-item:first-child:nth-last-child(1) ~ .exhibit-item {
+    display:inline-block;
+}
+
+
+
 .layout-nal-imggal .gallery-showcase,
 .layout-nal-imggal .gallery.with-showcase,
 .layout-nal-imggal .gallery.left, 
