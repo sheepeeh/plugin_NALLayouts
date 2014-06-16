@@ -31,7 +31,7 @@ $galleryPosition = isset($options['gallery-position'])
             <?php echo $attachment['caption'] ?>
             </div>
          
-            <?php if ($counter % 4 == 0): ?>
+            <?php if ($counter % 4 == 0 && $attachment != end($attachments)): ?>
                 <div class="break-row"></div>
             <?php endif; ?>
 
