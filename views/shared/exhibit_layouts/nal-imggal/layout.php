@@ -26,7 +26,11 @@ $galleryPosition = isset($options['gallery-position'])
     <?php endif; ?>
             <?php $counter++; ?>
              <div class="exhibit-item exhibit-gallery-item">
-            <?php echo file_markup($file,array('imageSize'=>'thumbnail')); ?>
+             <?php $altText = "Thumbnail for item, linking to full sized image."; ?>
+            <?php if  ($description = (metadata($item, array("Dublin Core", "Description")))): ?>
+            <?php $altText =  $description; ?>
+            <?php endif; ?> 
+            <?php echo file_markup($file, array('imageSize'=>'thumbnail', 'imgAttributes'=>array('alt' =>  "$altText", 'title' => metadata($item, array("Dublin Core", "Title"))))); ?>
             <div class="exhibit-item-title">
             <?php echo "<a href=".exhibit_builder_exhibit_item_uri($item).">".metadata($item, array("Dublin Core", "Title"), array('snippet'=>100))."</a>"; ?>
             <?php if (metadata($item, array("Dublin Core", "Date"))) { echo '<span class="exhibit-item-date"> (' . metadata($item, array("Dublin Core", "Date")) . ')</span>'; } ?>
@@ -43,5 +47,5 @@ $galleryPosition = isset($options['gallery-position'])
 
         <?php endforeach; ?>
     </div>
-
+</div>
 
