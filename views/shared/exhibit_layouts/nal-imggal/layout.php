@@ -16,7 +16,7 @@ $galleryPosition = isset($options['gallery-position'])
 </div>
 <?php endif; ?>
 <div class="gallery <?php if ($showcaseFile) echo "with-showcase $galleryPosition"; ?>">
-<?php echo $text; ?>
+<div style="text-align:left;"><?php echo $text; ?></div>
 <?php $counter = 0; ?>
   <?php foreach ($attachments as $attachment): ?>
         <?php $item = $attachment->getItem(); ?>
@@ -35,7 +35,13 @@ $galleryPosition = isset($options['gallery-position'])
             <?php echo "<a href=".exhibit_builder_exhibit_item_uri($item).">".metadata($item, array("Dublin Core", "Title"), array('snippet'=>100))."</a>"; ?>
             <?php if (metadata($item, array("Dublin Core", "Date"))) { echo '<span class="exhibit-item-date"> (' . metadata($item, array("Dublin Core", "Date")) . ')</span>'; } ?>
            </div>
-            <?php echo $attachment['caption'] ?>
+           <?php if ($attachment['caption']): ?>
+                <?php echo $attachment['caption'] ?>
+                <?php elseif ($description = (metadata($item, array("Dublin Core", "Description"), array('snippet'=>150)))): ?>
+                    <div class="exhibit-item-caption">
+                <?php echo  $description; ?>
+                </div>
+            <?php endif; ?>
             </div>
          
             <?php if ($counter % 4 == 0 && $attachment != end($attachments)): ?>
