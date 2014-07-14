@@ -9,7 +9,7 @@ $galleryPosition = isset($options['gallery-position'])
 
     $size = isset($options['file-size'])
     ? html_escape($options['file-size'])
-    : 'square_thumbnail';
+    : 'thumbnail';
 ?>
 <?php if ($showcaseFile): ?>
 <div class="gallery-showcase <?php echo $showcasePosition; ?> with-<?php echo $galleryPosition; ?>">
@@ -36,11 +36,11 @@ $galleryPosition = isset($options['gallery-position'])
 			<?php if  ($description = (metadata($item, array("Dublin Core", "Description")))): ?>
 			<?php $altText =  $description; ?>
 			<?php endif; ?> 
-			<?php echo file_markup($file, array('imageSize'=>'thumbnail', 'imgAttributes'=>array('alt' =>  "$altText", 'title' => metadata($item, array("Dublin Core", "Title"))))); ?>
-
+			<?php $image = file_image($size, array('imgAttributes'=>array('alt' =>  "$altText", 'title' => metadata($item, array("Dublin Core", "Title")))), $file); ?>
+			<?php echo exhibit_builder_link_to_exhibit_item($image, array('imageSize'=>$size, 'imgAttributes'=>array('alt' =>  "$altText", 'title' => metadata($item, array("Dublin Core", "Title")))), $item); ?>
 			<?php if ($attachment['caption']): ?>
 				<div class="exhibit-item-caption">
-			    	<?php echo $attachment['caption'] ?>
+			    	<?php echo $attachment['caption']; ?>
 				</div>
 			<?php endif; ?>
 		</div>

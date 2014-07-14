@@ -68,7 +68,7 @@
 
 .layout-nal-document-gallery .document-row {
     width:100%;
-    text-align:center;
+    text-align:left;
     display:table-row;
 }
 
@@ -104,13 +104,13 @@
     margin: 0 0 2% 0;
     clear: both;
     width: 90%;
-    text-align: justify;
+    text-align: left;
 }
 
 .layout-nal-document-gallery .exhibit-item-caption h3 {
     margin: 0 0 2% 0;
     clear: both;
     width: 90%;
-    text-align: justify;
+    text-align: left;
 }
 
