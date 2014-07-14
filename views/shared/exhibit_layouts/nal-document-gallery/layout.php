@@ -19,7 +19,24 @@ $galleryPosition = isset($options['gallery-position'])
     ?>
 </div>
 <?php endif; ?>
-<div class="gallery <?php if ($showcaseFile || !empty($text)) echo "with-showcase $galleryPosition"; ?>">
-    <?php echo $this->exhibitAttachmentGallery($attachments, array('imageSize' => $size)); ?>
+<div class="gallery <?php if ($showcaseFile) echo "with-showcase $galleryPosition"; ?>">
+<div style="text-align:left;"><?php echo $text; ?></div>
+<?php foreach ($attachments as $attachment): ?>
+    <?php $item = $attachment->getItem(); ?>
+    <?php $file = $attachment->getFile(); ?>
+    <div class="exhibit-item exhibit-gallery-item">
+        <?php $altText = "Thumbnail for item, linking to full sized image."; ?>
+        <?php if  ($description = (metadata($item, array("Dublin Core", "Description")))): ?>
+            <?php $altText =  $description; ?>
+        <?php endif; ?> 
+        <?php echo file_markup($file, array('imageSize'=>$size, 'imgAttributes'=>array('alt' =>  "$altText", 'title' => metadata($item, array("Dublin Core", "Title"))))); ?>
+
+        <?php if ($attachment['caption']): ?>
+        	<div class="exhibit-item-caption">
+            	<?php echo $attachment['caption'] ?>
+        	</div>
+        <?php endif; ?>
+    </div>
+<?php endforeach; ?>
+    </div>
 </div>
-<?php echo $text; ?>
