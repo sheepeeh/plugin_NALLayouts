@@ -21,6 +21,7 @@
     margin-right: 0;
 }
 
+
 .layout-nal-document-gallery .gallery-showcase,
 .layout-nal-document-gallery .gallery.with-showcase,
 .layout-nal-document-gallery .gallery.left, 
@@ -61,10 +62,21 @@
 }
 .layout-nal-document-gallery {
     width:100%;
+}
+
+.layout-nal-document-gallery .document-row {
+    width:100%;
     text-align:center;
     display:table-row;
 }
 
+
+.layout-nal-document-gallery .breakrow {
+    width:100%;
+    height:2%;
+    clear:both;
+}
+ 
 .layout-nal-document-gallery .gallery-showcase.left.with-right +
 .gallery.with-showcase.right {
     margin-left: 0;
@@ -87,6 +99,13 @@
 }
 
 .layout-nal-document-gallery .exhibit-item-caption p {
+    margin: 0 0 2% 0;
+    clear: both;
+    width: 90%;
+    text-align: justify;
+}
+
+.layout-nal-document-gallery .exhibit-item-caption h3 {
     margin: 0 0 2% 0;
     clear: both;
     width: 90%;

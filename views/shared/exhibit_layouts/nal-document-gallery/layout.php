@@ -20,23 +20,34 @@ $galleryPosition = isset($options['gallery-position'])
 </div>
 <?php endif; ?>
 <div class="gallery <?php if ($showcaseFile) echo "with-showcase $galleryPosition"; ?>">
-<div style="text-align:left;"><?php echo $text; ?></div>
-<?php foreach ($attachments as $attachment): ?>
-    <?php $item = $attachment->getItem(); ?>
-    <?php $file = $attachment->getFile(); ?>
-    <div class="exhibit-item exhibit-gallery-item">
-        <?php $altText = "Thumbnail for item, linking to full sized image."; ?>
-        <?php if  ($description = (metadata($item, array("Dublin Core", "Description")))): ?>
-            <?php $altText =  $description; ?>
-        <?php endif; ?> 
-        <?php echo file_markup($file, array('imageSize'=>$size, 'imgAttributes'=>array('alt' =>  "$altText", 'title' => metadata($item, array("Dublin Core", "Title"))))); ?>
+	<div style="text-align:left;"><?php echo $text; ?></div>
+	<?php $counter = 0; ?>
+	<?php foreach ($attachments as $attachment): ?>
+		<?php $item = $attachment->getItem(); ?>
+		<?php $file = $attachment->getFile(); ?>
+		<?php if ($counter == 0): ?>
+		<div class="document-row">
+		<?php endif; ?>
+		<?php $counter++; ?>
+		 <div class="exhibit-item exhibit-gallery-item">
+			<?php $altText = "Thumbnail for item, linking to full sized image."; ?>
+			<?php if  ($description = (metadata($item, array("Dublin Core", "Description")))): ?>
+			<?php $altText =  $description; ?>
+			<?php endif; ?> 
+			<?php echo file_markup($file, array('imageSize'=>'thumbnail', 'imgAttributes'=>array('alt' =>  "$altText", 'title' => metadata($item, array("Dublin Core", "Title"))))); ?>
 
-        <?php if ($attachment['caption']): ?>
-        	<div class="exhibit-item-caption">
-            	<?php echo $attachment['caption'] ?>
-        	</div>
-        <?php endif; ?>
-    </div>
-<?php endforeach; ?>
-    </div>
+			<?php if ($attachment['caption']): ?>
+				<div class="exhibit-item-caption">
+			    	<?php echo $attachment['caption'] ?>
+				</div>
+			<?php endif; ?>
+		</div>
+
+		<?php if ($counter % 4 == 0 && $attachment != end($attachments)): ?>
+		    </div>
+		    <span class="break-row">&nbsp;</span>
+		    <div class="document-row">
+		<?php endif; ?>
+	<?php endforeach; ?>
+	</div>
 </div>
