@@ -8,6 +8,7 @@
     margin-right: 0;
 }
 
+
 .layout-nal-document-gallery .gallery.with-showcase {
     margin-bottom: .5em;
 }
@@ -62,6 +63,7 @@
 }
 .layout-nal-document-gallery {
     width:100%;
+    margin-left:1.25%;
 }
 
 .layout-nal-document-gallery .document-row {
