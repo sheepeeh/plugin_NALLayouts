@@ -20,7 +20,9 @@ $galleryPosition = isset($options['gallery-position'])
 </div>
 <?php endif; ?>
 <div class="gallery <?php if ($showcaseFile) echo "with-showcase $galleryPosition"; ?>">
-	<div style="text-align:left;"><?php echo $text; ?></div>
+	<?php if ($text): ?>
+		<div style="text-align:left;"><?php echo $text; ?></div>
+	<?php endif; ?>
 	<?php $counter = 0; ?>
 	<?php foreach ($attachments as $attachment): ?>
 		<?php $item = $attachment->getItem(); ?>
