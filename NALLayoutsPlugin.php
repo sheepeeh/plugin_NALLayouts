@@ -15,6 +15,11 @@ class NALLayoutsPlugin extends Omeka_Plugin_AbstractPlugin
             'name' => 'NAL Image Galleries',
             'description' => 'For migrating old Drupal Galleries'
         );
+
+        $layouts['nal-document-gallery'] = array(
+            'name' => 'NAL Document Galleries',
+            'description' => 'Gallery format with option for image size.'
+        );
         return $layouts;
     }
 }
