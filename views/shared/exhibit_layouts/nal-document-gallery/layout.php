@@ -31,13 +31,14 @@ $galleryPosition = isset($options['gallery-position'])
 		<div class="document-row">
 		<?php endif; ?>
 		<?php $counter++; ?>
-		 <div class="exhibit-item exhibit-gallery-item">
-			<?php $altText = "Thumbnail for item, linking to full sized image."; ?>
-			<?php if  ($description = (metadata($item, array("Dublin Core", "Description")))): ?>
-			<?php $altText =  $description; ?>
-			<?php endif; ?> 
-			<?php $image = file_image($size, array('imgAttributes'=>array('alt' =>  "$altText", 'title' => metadata($item, array("Dublin Core", "Title")))), $file); ?>
-			<?php echo exhibit_builder_link_to_exhibit_item($image, array('imageSize'=>$size, 'imgAttributes'=>array('alt' =>  "$altText", 'title' => metadata($item, array("Dublin Core", "Title")))), $item); ?>
+
+        <div class="exhibit-item exhibit-gallery-item">
+            
+            <?php $altText = "Thumbnail for item, linking to full sized image."; ?>
+			
+			<?php $image = file_image($size, array('alt' =>  "$altText", 'title' => metadata($item, array("Dublin Core", "Title"))), $file); ?>
+			<?php echo exhibit_builder_link_to_exhibit_item($image, array('alt' =>  "$altText", 'title' => metadata($item, array("Dublin Core", "Title"))), $item); ?>
+
 			<?php if ($attachment['caption']): ?>
 				<div class="exhibit-item-caption">
 			    	<?php echo $attachment['caption']; ?>
