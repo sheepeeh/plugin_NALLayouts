@@ -22,7 +22,7 @@ $galleryPosition = isset($options['gallery-position'])
         <?php $item = $attachment->getItem(); ?>
         <?php $file = $attachment->getFile(); ?>
       <?php if ($counter == 0): ?>
-        <div id="imggal-row">
+        <div id="moviegal-row">
     <?php endif; ?>
             <?php $counter++; ?>
              <div class="exhibit-item exhibit-gallery-item">
@@ -48,10 +48,10 @@ $galleryPosition = isset($options['gallery-position'])
             <?php endif; ?>
             </div>
          
-            <?php if ($counter % 4 == 0 && $attachment != end($attachments)): ?>
+            <?php if ($counter % 2 == 0 && $attachment != end($attachments)): ?>
                 </div>
                 <span class="break-row"></span>
-                <div id="imggal-row">
+                <div id="moviegal-row">
             <?php endif; ?>
 
 

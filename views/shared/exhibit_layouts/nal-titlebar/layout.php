@@ -31,5 +31,5 @@ $galleryPosition = isset($options['gallery-position'])
            </div>
 			<?php endforeach; ?>
     </div>
-<?php echo $text; ?>
+<?php echo $this->shortcodes($text); ?>
 

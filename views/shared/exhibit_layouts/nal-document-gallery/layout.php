@@ -21,7 +21,7 @@ $galleryPosition = isset($options['gallery-position'])
 <?php endif; ?>
 <div class="gallery <?php if ($showcaseFile) echo "with-showcase $galleryPosition"; ?>">
 	<?php if ($text): ?>
-		<div style="text-align:left;"><?php echo $text; ?></div>
+		<div style="text-align:left;"><?php echo $this->shortcodes($text); ?></div>
 	<?php endif; ?>
 	<?php $counter = 0; ?>
 	<?php foreach ($attachments as $attachment): ?>

@@ -114,7 +114,6 @@
 .layout-nal-imggal .exhibit-item-title {
     margin: 0 0 2% 0;
     clear: both;
-    font-variant:small-caps;
 }
 
 @media only screen and (min-width: 768px) and (max-width: 959px) {
@@ -122,6 +121,7 @@
         clear:both !important; 
         display:block !important;      
         width:100% !important;
+        padding: 0px !important;
     }
 }
 
@@ -130,6 +130,7 @@
         clear:both !important;       
         display:block !important;      
         width:100% !important;
+        padding: 0px !important;
     }
 }
 
@@ -137,7 +138,8 @@
     .layout-nal-imggal .exhibit-item {
         clear:both !important;
         display:block !important;      
-        width:100% !important;       
+        width:100% !important; 
+        padding: 0px !important;      
     }
 }
 
@@ -145,7 +147,8 @@
     .layout-nal-imggal .exhibit-item {
         clear:both !important;
         display:block !important;      
-        width:100% !important;       
+        width:100% !important;     
+        padding: 0px !important;  
     }
 
 

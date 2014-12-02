@@ -20,6 +20,11 @@ class NALLayoutsPlugin extends Omeka_Plugin_AbstractPlugin
             'name' => 'NAL Document Galleries',
             'description' => 'Gallery format with option for image size.'
         );
+    
+        $layouts['nal-moviegal'] = array(
+            'name' => 'NAL Movie Gallery',
+            'description' => 'Display two moving images per row.'
+        );
         return $layouts;
     }
 }
