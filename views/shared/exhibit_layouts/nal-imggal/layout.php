@@ -36,7 +36,7 @@ $galleryPosition = isset($options['gallery-position'])
             <?php if (metadata($item, array("Dublin Core", "Date"))) { echo '<span class="exhibit-item-date"> (' . metadata($item, array("Dublin Core", "Date")) . ')</span>'; } ?>
            </div>
            <?php if ($attachment['caption']): ?>
-                <?php echo $attachment['caption']; ?>
+                <div class="exhibit-item-caption"><?php echo $attachment['caption']; ?></div>
             <?php elseif ($transcription = (metadata($item,array("Item Type Metadata","Transcription"),array('snippet'=>150)))): ?>
             <div class="exhibit-item-caption">
                 <?php echo  $transcription; ?>
