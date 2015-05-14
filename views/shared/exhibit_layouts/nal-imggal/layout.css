@@ -108,7 +108,7 @@
 .layout-nal-imggal {
     width:100%;
     text-align:center;
-    display:table-row;
+    display:table;
 }
 
 .layout-nal-imggal .exhibit-item-title {
