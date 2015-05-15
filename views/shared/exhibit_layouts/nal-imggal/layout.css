@@ -124,6 +124,11 @@
     margin-bottom:0.5em;
 }
 
+.layout-nal-imggal .exhibit-item-transcript {
+    font-family: "Courier New", monospace;
+    text-align:justify;
+}
+
 #imggal-row > div:only-child {
     width: 90%;
 }
