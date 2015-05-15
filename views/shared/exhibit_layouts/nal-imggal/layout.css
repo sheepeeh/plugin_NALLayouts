@@ -112,8 +112,16 @@
 }
 
 .layout-nal-imggal .exhibit-item-title {
-    margin: 0 0 2% 0;
     clear: both;
+    font-size:1.25em;
+    font-weight:bold;
+}
+
+.layout-nal-imggal .exhibit-item-date {
+    font-style:italic;
+    clear: both;
+    font-size:1.25em;
+    margin-bottom:0.5em;
 }
 
 #imggal-row > div:only-child {

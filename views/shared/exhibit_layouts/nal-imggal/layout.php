@@ -43,20 +43,17 @@ $showMetadata = isset($options['metadata-display'])
             <?php $altText =  $description; ?>
             <?php endif; ?> 
             <?php echo file_markup($file, array('imageSize'=>$size, 'imgAttributes'=>array('alt' =>  "$altText", 'title' => metadata($item, array("Dublin Core", "Title"))))); ?>
-<!--             <div class="exhibit-item-title">
-            <?php echo "<a href=".exhibit_builder_exhibit_item_uri($item).">".metadata($item, array("Dublin Core", "Title"), array('snippet'=>100))."</a>"; ?>
-            <?php if (metadata($item, array("Dublin Core", "Date"))) { echo '<span class="exhibit-item-date"> (' . metadata($item, array("Dublin Core", "Date")) . ')</span>'; } ?>
-           </div> -->
+
            <?php if ($attachment['caption']): ?>
                 <div class="exhibit-item-caption">
                 <?php 
                     if (in_array("show-title", $showMetadata)) { 
-                        echo "<div class='exhibit-item-title' style='font-size:1.25em;'><a href="
+                        echo "<div class='exhibit-item-title'><a href="
                         .exhibit_builder_exhibit_item_uri($item).">".metadata($item, array("Dublin Core", "Title"), 
                             array('snippet'=>100))."</a></div>"; }
                     if (in_array("show-date", $showMetadata)) { 
-                        echo "<div class='exhibit-item-title' style='font-size:1.25em;'>"
-                        .metadata($item, array("Dublin Core", "Date"), array('snippet'=>100))."</div>"; }
+                        echo "<div class='exhibit-item-date'>("
+                        .metadata($item, array("Dublin Core", "Date"), array('snippet'=>100)).")</div>"; }
 
 
                 ; ?>
