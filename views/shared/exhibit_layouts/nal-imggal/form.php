@@ -32,6 +32,7 @@ $options = $block->getOptions();
         ?>
     </div>
 
+
     <div class="gallery-position">
         <?php echo $this->formLabel($formStem . '[options][gallery-position]', __('Gallery position')); ?>
         <?php
@@ -45,5 +46,47 @@ $options = $block->getOptions();
         ?>
         <p class="instructions"><?php echo __('If there is no showcase file the gallery will use the full width of the page.'); ?></p>
     </div>
-    
+
+    <div class="file-size">
+        <?php echo $this->formLabel($formStem . '[options][file-size]', __('File size')); ?>
+        <?php
+        echo $this->formSelect($formStem . '[options][file-size]',
+            @$options['file-size'], array(),
+            array(
+                'thumbnail' => __('Thumbnail'),
+                'fullsize' => __('Fullsize'),
+                'square_thumbnail' => __('Square Thumbnail')
+                ));
+                ?>
+    </div>
+    <div class="image-width">
+        <?php echo $this->formLabel($formStem . '[options][img-width]', __('Image Width')); ?>
+        <?php
+        echo $this->formSelect($formStem . '[options][img-width]',
+            @$options['img-width'], array(),
+            array(
+                ' ' => "N/A",
+                '90%' => __('90%'),
+                '75%' => __('75%'),
+                '50%' => __('50%')
+                ));
+                ?>
+            <p class="instructions"><?php echo __('Only use this if the gallery contains only one single item.'); ?></p>
+    </div>
+
+    <div class="metadata-display">
+        <?php echo $this->formLabel($formStem . '[options][metadata-display]', __('Display these elements:')); ?>
+        <?php
+        echo $this->formMultiCheckbox($formStem . '[options][metadata-display]',
+            @$options['metadata-display'], array('listsep' => '&nbsp;'),
+            array(
+                "show-title" => " Title",
+                "show-date" => " Date",
+                "show-desc" => " Description"
+                ));
+                ?>
+         
+            <p class="instructions"><?php echo __('Check the boxes next to the elements you want to display in the caption area for elements in this block.'); ?></p>
+    </div>
+
 </div>

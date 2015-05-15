@@ -69,13 +69,3 @@ p {
     -moz-font-language-override: normal;
 }
 
-.layout-nal-titlebar .gallery .exhibit-item:nth-of-type(4n) .download-file {
-   float:right;
-   margin-right:5px;
-}
-
-.layout-nal-titlebar .gallery .exhibit-item:nth-of-type(4n) .exhibit-item-caption {
-   float:left;
-   margin-right:0px;
-   margin-left:10px;
-}

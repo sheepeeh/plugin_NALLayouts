@@ -116,6 +116,10 @@
     clear: both;
 }
 
+#imggal-row > div:only-child {
+    width: 90%;
+}
+
 @media only screen and (min-width: 768px) and (max-width: 959px) {
     .layout-nal-imggal .exhibit-item {
         clear:both !important; 
