@@ -1,0 +1,42 @@
+#sidebar-items {
+    font-size: .75em;
+}
+
+#sidebar-items > ul.items-list {
+    overflow: hidden;
+    padding: .25em 0;
+    list-style-type: none;
+    background-color: rgb(222, 227, 233) !important;
+}
+
+#sidebar-items > ul.items-list > li {
+    line-height: 1.25em;
+    clear: both;
+    height: auto;
+    padding: .5em .25em;
+    vertical-align: top;
+}
+
+ul.items-list .item-title {
+    float: left;
+    clear: right;
+    width: 67%;
+    padding-right: .25em;
+    vertical-align: top;
+}
+
+#sidebar-items > ul.items-list > li > div.item-file {
+    float: left;
+    clear: left;
+    width: 55px;
+    padding: 0 .25em .5em .25em;
+}
+
+#sidebar-items > ul.items-list > li:nth-child(n+2) > div {
+    padding-top: .25em;
+}
+
+#sidebar-items > ul.items-list > li:nth-child(n+2) {
+    margin-top: .75em;
+    border-top: 5px solid #fff;
+}

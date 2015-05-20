@@ -9,7 +9,7 @@ $options = $block->getOptions();
  </style>
 <div class="selected-items">
     <h4><?php echo __('Items'); ?></h4>
-    <?php echo $this->exhibitFormAttachmentsNAL($block); ?>
+    <?php echo $this->exhibitFormAttachments($block); ?>
 </div>
 
 <div class="block-text">
