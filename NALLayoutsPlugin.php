@@ -29,29 +29,57 @@ class NALLayoutsPlugin extends Omeka_Plugin_AbstractPlugin
         return $layouts;
     }
 
-    // public function hookInitialize()
-    // {
-    //     get_view()->addHelperPath(dirname(__FILE__) . '/views/helpers', 'NALLayouts_View_Helper_');
-    // }
-
-    // public function hookDefineAcl($args)
-    // {
-    //     $acl = $args['acl'];
-    //     $exhibitItems = new Zend_Acl_Resource('NALLayouts_ExhibitsNAL');
-    //     $acl->add($exhibitItems);        
-    // }
-
-    public function hookAdminExhibitPagePanelFields() {
-        ?>
-        <div class="field">
-            <div class="two columns alpha">
-                <?php echo $this->formLabel('tags', __('Tags')); ?>
-            </div>
-            <div class="five columns omega inputs">
-                <?php $exhibitPageTagList = join(', ', pluck('name', $exhibit_page->Tags)); ?>
-                <?php echo $this->formText('tags', $exhibitPageTagList); ?>
-            </div>
-        <?php
+    public static function nal_exhibit_builder_render_exhibit_page ($exhibitPage = null)
+{
+    if ($exhibitPage === null) {
+        $exhibitPage = get_current_record('exhibit_page');
     }
+    
+    $blocks = $exhibitPage->ExhibitPageBlocks;
+    $rawAttachments = $exhibitPage->getAllAttachments();
+    $attachments = array();
+    foreach ($rawAttachments as $attachment) {
+        $attachments[$attachment->block_id][] = $attachment;
+    }
+    foreach ($blocks as $index => $block) {
+        $layout = $block->getLayout();
+        if ($layout->id != "nal-sidebar") {
+        echo '<div class="exhibit-block layout-' . html_escape($layout->id) . '">';
+        echo get_view()->partial($layout->getViewPartial(), array(
+            'index' => $index,
+            'options' => $block->getOptions(),
+            'text' => $block->text,
+            'attachments' => array_key_exists($block->id, $attachments) ? $attachments[$block->id] : array()
+        ));
+        echo '</div>'; }
+    }
+}
+
+    public static function nal_exhibit_builder_render_exhibit_sidebar ($exhibitPage = null)
+{
+    if ($exhibitPage === null) {
+        $exhibitPage = get_current_record('exhibit_page');
+    }
+    
+    $blocks = $exhibitPage->ExhibitPageBlocks;
+    $rawAttachments = $exhibitPage->getAllAttachments();
+    $attachments = array();
+    foreach ($rawAttachments as $attachment) {
+        $attachments[$attachment->block_id][] = $attachment;
+    }
+    foreach ($blocks as $index => $block) {
+        $layout = $block->getLayout();
+        if ($layout->id == "nal-sidebar"){
+                
+                echo get_view()->partial($layout->getViewPartial(), array(
+                    'index' => $index,
+                    'options' => $block->getOptions(),
+                    'text' => $block->text,
+                    'attachments' => array_key_exists($block->id, $attachments) ? $attachments[$block->id] : array()
+                ));
+        }
+    }
+}
+
 
 }
