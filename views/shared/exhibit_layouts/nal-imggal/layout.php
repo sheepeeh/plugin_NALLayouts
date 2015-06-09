@@ -56,15 +56,15 @@ $showMetadata = isset($options['metadata-display'])
                             .exhibit_builder_exhibit_item_uri($item).">".metadata($item, array("Dublin Core", "Title"), 
                                 array('snippet'=>100))."</a></div>"; 
                         }                   
-                        if (in_array("show-date", $showMetadata)) { 
+                        if (in_array("show-date", $showMetadata) && metadata($item, array("Dublin Core","Date"))) { 
                             echo "<div class='exhibit-item-date'>("
                             .metadata($item, array("Dublin Core", "Date"), array('snippet'=>100)).")</div>";
                         }
-                        if (in_array("show-desc", $showMetadata)) { 
+                        if (in_array("show-desc", $showMetadata) && metadata($item, array("Dublin Core","Description"))) { 
                             echo '<div class="exhibit-item-description">'
                             .metadata($item, array("Dublin Core", "Description"), array('snippet'=>150))."</div>";
                         }
-                        if (in_array("show-script", $showMetadata)) { 
+                        if (in_array("show-script", $showMetadata) && metadata($item, array("Item Type Metadata","Transcription"))) { 
                             echo "<div class='exhibit-item-transcript'>"
                             .metadata($item, array("Item Type Metadata","Transcription"),array('snippet'=>150))."</div>"; 
                         }
