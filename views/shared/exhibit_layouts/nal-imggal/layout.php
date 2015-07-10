@@ -74,10 +74,10 @@ $showMetadata = isset($options['metadata-display'])
 
                             if (in_array("show-title", $showMetadata)) { 
                                 echo "<div class='exhibit-item-title'><a href="
-                                .exhibit_builder_exhibit_item_uri($item).">".metadata($item, array("Dublin Core", "Title"), 
+                                .exhibit_builder_exhibit_item_uri($item)." alt='Link to individual item page.' title='View more information about this item.'>".metadata($item, array("Dublin Core", "Title"), 
                                     array('snippet'=>100))."</a></div>"; 
                             }                   
-                            if (in_array("show-date", $showMetadata)) { 
+                            if (in_array("show-date", $showMetadata) && is_null(metadata($item, array("Dublin Core", "Date"))) == false) { 
                                 echo "<div class='exhibit-item-date'>("
                                     .metadata($item, array("Dublin Core", "Date"), 
                                         array('snippet'=>100)) . ")</div>";
