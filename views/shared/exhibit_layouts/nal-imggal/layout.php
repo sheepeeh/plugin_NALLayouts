@@ -67,11 +67,15 @@ $showMetadata = isset($options['metadata-display'])
 
                 <?php if ($attachment['caption'] || !empty($showMetadata)): ?>
                     <div class="exhibit-item-caption">
+
                         <?php //echo caption and selected metadata elements
-                        if ($attachment['caption']) { echo $attachment['caption']; }
+                        
+                        if ($attachment['caption'] && empty($showMetadata)) { 
+                            echo $attachment['caption']; 
+                        }
 
                         if (!empty($showMetadata)) {
-
+                           
                             if (in_array("show-title", $showMetadata)) { 
                                 echo "<div class='exhibit-item-title'><a href="
                                 .exhibit_builder_exhibit_item_uri($item)." alt='Link to individual item page.' title='View more information about this item.'>".metadata($item, array("Dublin Core", "Title"), 
@@ -80,7 +84,10 @@ $showMetadata = isset($options['metadata-display'])
                             if (in_array("show-date", $showMetadata) && is_null(metadata($item, array("Dublin Core", "Date"))) == false) { 
                                 echo "<div class='exhibit-item-date'>("
                                     .metadata($item, array("Dublin Core", "Date"), 
-                                        array('snippet'=>100)) . ")</div>";
+                                        array('snippet'=>50)) . ")</div>";
+                            }
+                            if ($attachment['caption']) { 
+                                echo $attachment['caption']; 
                             }
                             if (in_array("show-desc", $showMetadata) && is_null(metadata($item, array('Dublin Core', 'Description'))) == false) { 
                                 echo '<div class="exhibit-item-description">'
@@ -89,7 +96,7 @@ $showMetadata = isset($options['metadata-display'])
                             if (in_array("show-script", $showMetadata) && is_null(metadata($item, array("Item Type Metadata","Transcription"))) == false) { 
                                 echo "<div class='exhibit-item-transcript'>"
                                 .metadata($item, array("Item Type Metadata","Transcription"),array('snippet'=>150))."</div>"; 
-                            }
+                        }
                     } ?>
 
 </div>

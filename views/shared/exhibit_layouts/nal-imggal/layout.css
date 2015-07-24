@@ -95,6 +95,14 @@
 .layout-nal-imggal .gallery.with-showcase.right {
     clear: right;
 }
+#content .layout-nal-imggal .gallery {
+    clear: right;
+    padding-bottom:0.25em;
+}
+
+.exhibit-block.layout-nal-imggal {
+    margin-bottom: 0px;
+}
 
 .layout-nal-imggal .gallery.with-showcase img {
     max-width: 100%;
