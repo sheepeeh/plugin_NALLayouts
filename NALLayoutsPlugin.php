@@ -44,6 +44,7 @@ class NALLayoutsPlugin extends Omeka_Plugin_AbstractPlugin
     foreach ($blocks as $index => $block) {
         $layout = $block->getLayout();
         if ($layout->id != "nal-sidebar") {
+
         echo '<div class="exhibit-block layout-' . html_escape($layout->id) . '">';
         echo get_view()->partial($layout->getViewPartial(), array(
             'index' => $index,

@@ -13,7 +13,6 @@
     line-height: 1.25em;
     clear: both;
     height: auto;
-    padding: .5em .25em;
     vertical-align: top;
 }
 
@@ -29,11 +28,11 @@ ul.items-list .item-title {
     float: left;
     clear: left;
     width: 55px;
-    padding: 0 .25em .5em .25em;
+    padding: 0.15em .25em .5em .25em;
 }
 
 #sidebar-items > ul.items-list > li:nth-child(n+2) > div {
-    padding-top: .25em;
+    padding-top: .45em;
 }
 
 #sidebar-items > ul.items-list > li:nth-child(n+2) {

@@ -23,7 +23,7 @@ $showMetadata = isset($options['metadata-display'])
     <div class="gallery-showcase <?php echo $showcasePosition; ?> with-<?php echo $galleryPosition; ?>">
         <?php
         $attachment = array_shift($attachments);
-        echo $this->exhibitAttachment($attachment, array('imageSize' => 'fullsize'));
+        echo $this->exhibitAttachment($attachment, array('imageSize' => 'fullsize'), null, true);
         ?>
     </div>
 <?php endif; ?>
@@ -42,28 +42,37 @@ $showMetadata = isset($options['metadata-display'])
                 <?php $counter++; ?>
 
                 <div class="exhibit-item exhibit-gallery-item" style=<?php echo '"width:' . $width . '"' ;?>>
-                   <?php 
-                        // echo attachment image
+                    <?php if (metadata($item, 'has thumbnail')): ?>
+                       <?php 
+                       if (metadata($file, 'MIME Type') == 'application/pdf' && $size == 'fullsize' && $width != "N/A") {
+                            echo file_markup($file);
+                       } else {
+                            // echo attachment image
 
-                        // if  ($description = (metadata($item, array("Dublin Core", "Description")))) {
-                        //     $altTitle = $description;
-                        // } elseif ($caption = $attachment['caption']) {
-                        //     $altTitle = $caption;
-                        // } else {
-                        //     $altTitle = $title;                            
-                        // }
+                            // if  ($description = (metadata($item, array("Dublin Core", "Description")))) {
+                            //     $altTitle = $description;
+                            // } elseif ($caption = $attachment['caption']) {
+                            //     $altTitle = $caption;
+                            // } else {
+                            //     $altTitle = $title;                            
+                            // }
 
-                        // $altText = "Thumbnail for '$altTitle'."; 
-                        $fileOptions = array();
+                            // $altText = "Thumbnail for '$altTitle'."; 
+                            $fileOptions = array();
 
-                        $fileOptions['imgAttributes']['alt'] = "Thumbnail for the first (or only) page of $title.";
-                        $fileOptions['imgAttributes']['title'] = $title;
-                        $fileOptions['imageSize'] = $size;
-                        $fileOptions['linkAttributes']['href'] = exhibit_builder_exhibit_item_uri($item);
-                        $fileOptions['linkAttributes']['alt'] = "View more information about $title.";
-                        $fileOptions['linkAttributes']['title'] = "View more information about this item.";
+                            $fileOptions['imgAttributes']['alt'] = "Thumbnail for the first (or only) page of $title.";
+                            $fileOptions['imgAttributes']['title'] = $title;
+                            $fileOptions['imageSize'] = $size;
+                            $fileOptions['linkAttributes']['href'] = exhibit_builder_exhibit_item_uri($item);
+                            $fileOptions['linkAttributes']['alt'] = "View more information about $title.";
+                            $fileOptions['linkAttributes']['title'] = "View more information about this item.";
 
-                        echo file_markup($file, $fileOptions, null); ?>
+                            $image = file_image($size, $fileOptions['imgAttributes'], $file);
+                            $html = "<div class='item-file'>" . exhibit_builder_link_to_exhibit_item($image, array('alt' => 'View more information about this item.'), $item) . "</div>";
+                            echo $html;
+                        }
+                            ?>
+                    <?php endif; ?>
 
                 <?php if ($attachment['caption'] || !empty($showMetadata)): ?>
                     <div class="exhibit-item-caption">
