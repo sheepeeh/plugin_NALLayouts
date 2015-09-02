@@ -44,7 +44,7 @@ $showMetadata = isset($options['metadata-display'])
                 <div class="exhibit-item exhibit-gallery-item" style=<?php echo '"width:' . $width . '"' ;?>>
                     <?php if (metadata($item, 'has thumbnail')): ?>
                        <?php 
-                       if (metadata($file, 'MIME Type') == 'application/pdf' && $size == 'fullsize' && $width != "N/A") {
+                       if (metadata($file, 'MIME Type') == 'application/pdf' && $size == 'fullsize' && $width != "N/A" && !isMobile()) {
                             echo file_markup($file);
                        } else {
                             // echo attachment image
