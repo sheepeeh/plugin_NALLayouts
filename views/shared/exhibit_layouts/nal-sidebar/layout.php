@@ -6,6 +6,7 @@ $size = isset($options['file-size'])
 $fileOptions = array();
 ?>
 <div id="sidebar-items">
+    <h2>Related Items</h2>
     <ul class="items-list">
         <?php foreach ($attachments as $attachment): ?>
             <?php $item = $attachment->getItem(); ?>
