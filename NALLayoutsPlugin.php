@@ -1,8 +1,40 @@
 <?php
 class NALLayoutsPlugin extends Omeka_Plugin_AbstractPlugin
 {
+    protected $_hooks = array('exhibit_builder_page_head');
+    protected $_filters = array('exhibit_layouts', 'exhibit_builder_link_to_exhibit_item','exhibit_builder_exhibit_item_uri');
 
-    protected $_filters = array('exhibit_layouts');
+    
+    // With thanks to github user annamichelle https://github.com/annamichelle/LightboxGallery/blob/4c882ae72ae1764cc1f1aed61ef7fa79c9fc21df/LightboxGalleryPlugin.php
+
+   public function hookExhibitBuilderPageHead($args) {
+            if (array_key_exists('nal-imggal', $args['layouts'])) {
+                queue_js_file('lightbox.min', 'javascripts/lightbox');
+                queue_css_file('lightbox');
+            }
+    
+    }
+
+    public static function filterExhibitBuilderLinkToExhibitItem($html)
+    {
+        preg_match('/(href\=\")(.*?)(\")/', $html, $matches);
+        $itemID = preg_replace('/(href\=\")(.*)([0-9]{3,})(\")/', '\3', $matches[0]);
+        $item = get_record_by_id('Item', $itemID);
+        $files = $item->getFile();
+
+        $html = str_replace($matches[0], "href=\"" . file_display_url($files, 'fullsize') . '" data-lightbox="lightbox-gallery"', $html);
+        return $html;
+    }
+
+    public static function filterExhibitBuilderExhibitItemUri($uri)
+    {
+        // $itemID = preg_replace('/(http:\/\/)(.*)([0-9]{3,})/', '\3', $uri);
+        // $item = get_record_by_id('Item', $itemID);
+        // $files = $item->getFile();
+        $uri = "test"; //file_display_url($files, 'fullsize');
+        echo $uri;
+        return $uri;
+    }
 
     public function filterExhibitLayouts($layouts)
     {

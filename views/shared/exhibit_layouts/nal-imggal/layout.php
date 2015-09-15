@@ -63,12 +63,14 @@ $showMetadata = isset($options['metadata-display'])
                             $fileOptions['imgAttributes']['alt'] = "Thumbnail for the first (or only) page of $title.";
                             $fileOptions['imgAttributes']['title'] = $title;
                             $fileOptions['imageSize'] = $size;
-                            $fileOptions['linkAttributes']['href'] = exhibit_builder_exhibit_item_uri($item);
+                            $fileOptions['linkAttributes']['href'] = file_display_url($file,'fullsize');
                             $fileOptions['linkAttributes']['alt'] = "View more information about $title.";
                             $fileOptions['linkAttributes']['title'] = "View more information about this item.";
+                            $fileOptions['linkAttributes']['data-lightbox'] = "lightbox-gallery";
 
                             $image = file_image($size, $fileOptions['imgAttributes'], $file);
-                            $html = "<div class='item-file'>" . exhibit_builder_link_to_exhibit_item($image, array('alt' => 'View more information about this item.'), $item) . "</div>";
+                            $html = "<div class='item-file'>". exhibit_builder_link_to_exhibit_item($image, array('alt' => 'View more information about this item.'), $item) . "</div>";
+                            // $html = "<div class=\"item-file\"><a href=\"" . file_display_url($file,'fullsize') . "\" alt=\"View more information about this item.\" data-lightbox=\"lightbox-gallery\" class=\"exhibit-item-link\">" .$image."</a></div>";
                             echo $html;
                         }
                             ?>
@@ -87,7 +89,7 @@ $showMetadata = isset($options['metadata-display'])
                            
                             if (in_array("show-title", $showMetadata)) { 
                                 echo "<div class='exhibit-item-title'><a href="
-                                .exhibit_builder_exhibit_item_uri($item)." alt='Link to individual item page.' title='View more information about this item.'>".metadata($item, array("Dublin Core", "Title"), 
+                                .exhibit_builder_exhibit_item_uri($item)." alt='Link to individual item page.' title='View more information about this item.' data-lightbox='lightbox'>".metadata($item, array("Dublin Core", "Title"), 
                                     array('snippet'=>100))."</a></div>"; 
                             }                   
                             if (in_array("show-date", $showMetadata) && is_null(metadata($item, array("Dublin Core", "Date"))) == false) { 
