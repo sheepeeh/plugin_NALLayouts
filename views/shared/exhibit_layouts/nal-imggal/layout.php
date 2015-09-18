@@ -22,6 +22,7 @@ $exhibit = get_current_record('exhibit');
  $exhibitUrl = exhibit_builder_exhibit_uri($exhibit);
  $exhibitUrll = $exhibitUrl . "item/";
 
+
 ?>
 <?php if ($showcaseFile): ?>
     <div class="gallery-showcase <?php echo $showcasePosition; ?> with-<?php echo $galleryPosition; ?>">
@@ -35,81 +36,72 @@ $exhibit = get_current_record('exhibit');
 
 <script type="text/javascript">
 
-       jQuery(document).ready(function() {
-            /*
-             *  Simple image gallery. Uses default settings
-             */
+    jQuery(document).ready(function() {
+    /* Code to make fancybox more accessible 
+    Be sure to also set .fancybox-nav span's visibility to "visible" so buttons are shown without the mouse. */
+    jQuery('.fancybox').fancybox({
+        openEffect  : 'none',
+        closeEffect : 'none',
+
+        prevEffect : 'none',
+        nextEffect : 'none',
+
+        // Show the close button
+        closeBtn  : true,
 
 
+        // Stop enter key from going to next image in gallery
+        keys : {
+            next : {
+                34 : 'up',   // page down
+                39 : 'left', // right arrow
+                40 : 'up'    // down arrow
+            },
+            prev : {
+                8  : 'right',  // backspace
+                33 : 'down',   // page up
+                37 : 'right',  // left arrow
+                38 : 'down'    // up arrow
+            },
+            close  : [27], // escape key
+            play   : [32], // space - start/stop slideshow
+            toggle : [70]  // letter "f" - toggle fullscreen
+        },
 
-          /*
-             *  Button helper. Disable animations, hide close button, change title type and content
-             */
-
-            jQuery('.fancybox').fancybox({
-                openEffect  : 'none',
-                closeEffect : 'none',
-
-                prevEffect : 'none',
-                nextEffect : 'none',
-
-                closeBtn  : true,
-
-                keys : {
-                    next : {
-                        34 : 'up',   // page down
-                        39 : 'left', // right arrow
-                        40 : 'up'    // down arrow
-                    },
-                    prev : {
-                        8  : 'right',  // backspace
-                        33 : 'down',   // page up
-                        37 : 'right',  // left arrow
-                        38 : 'down'    // up arrow
-                    },
-                    close  : [27], // escape key
-                    play   : [32], // space - start/stop slideshow
-                    toggle : [70]  // letter "f" - toggle fullscreen
-                },
-
-                helpers : {
-                    title : {
-                        type : 'inside'
-                    },
-                    buttons : {}
-                },
-
-                beforeShow : function() {
-                    var alt = this.element.find('img').attr('alt');                    
-                    this.inner.find('img').attr('alt', alt);
-                                  
-                },
-
-                afterShow: function(){
-                    jQuery('.fancybox-next').focus();
-                },
-
-                afterLoad : function() {          
-                  
-                    
-                    var itemHref = <?php echo '"' . $exhibitUrl . '"'; ?> + "/item/" + this.element.parent().parent().find('div.item-file').attr('item-id');
-                    var itemTitle = '<h3>' + this.element.parent().find('img').attr('title') + '</h2>';
-                    var itemLink = '<a href="' + itemHref + '" target="_blank">View more information about this item (opens in new window).</a>';
-                    var itemCount = '<span class="item-count">Item ' + (this.index + 1) + ' of ' + this.group.length + '</span>';
-                    this.title = itemCount + "<br>" + itemTitle + itemLink ;               
-                    
-                 },
-
-                 afterClose: function() {
-                        jQuery(this.element).focus();
-                    }
-
-            });
+        helpers : {
+            title : {
+                type : 'inside'
+            },
+            buttons : {}
+        },
 
 
+        // Set the fancybox image alt text to the parent image's alt text
+        beforeShow : function() {
+            var alt = this.element.find('img').attr('alt');                    
+            this.inner.find('img').attr('alt', alt);                                
+        },
 
+        // Move keyboard focus to the next button
+        afterShow: function(){
+            jQuery('.fancybox-next').focus();
+        },
 
-        });
+        // Set up content for the fancybox caption
+        afterLoad : function() {          
+            var itemHref = <?php echo '"' . $exhibitUrl . '"'; ?> + "/item/" + this.element.parent().parent().find('div.item-file').attr('item-id');
+            var itemTitle = '<h3>' + this.element.parent().find('img').attr('title') + '</h2>';
+            var itemLink = '<a href="' + itemHref + '" target="_blank">View more information about this item (opens in new window).</a>';
+            var itemCount = '<span class="item-count">Item ' + (this.index + 1) + ' of ' + this.group.length + '</span>';
+            this.title = itemCount + "<br>" + itemTitle + itemLink ;               
+        },
+
+         // Return focus to the element used to open the fancybox
+         afterClose: function() {
+            jQuery(this.element).focus();
+        }
+    });
+});
 
 </script>
     <div style="text-align:left;"><?php echo $this->shortcodes($text); ?>
@@ -174,9 +166,12 @@ $exhibit = get_current_record('exhibit');
                         }
 
                         if (!empty($showMetadata)) {
+                            $itemID = metadata($item, 'id');
                            
                             if (in_array("show-title", $showMetadata)) { 
-                                echo "<div class='exhibit-item-title' item-id='$itemID'>" . exhibit_builder_link_to_exhibit_item($title, array('alt' => 'View a larger image.', 'class' => 'fancybox', 'data-fancybox-group' => 'gallery'), $item) . "</div>"; 
+                                // This doubles the images in the gallery--need to figure out how  to suppress dublicates
+                                // . exhibit_builder_link_to_exhibit_item($title, array('alt' => 'View a larger image.', 'class' => 'fancybox', 'data-fancybox-group' => 'gallery'), $item)
+                                echo "<div class='exhibit-item-title' item-id='$itemID'>$title</div>"; 
                             }                   
                             if (in_array("show-date", $showMetadata) && is_null(metadata($item, array("Dublin Core", "Date"))) == false) { 
                                 echo "<div class='exhibit-item-date'>("
