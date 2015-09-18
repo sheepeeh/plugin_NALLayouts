@@ -18,6 +18,10 @@ $showMetadata = isset($options['metadata-display'])
 ? ($options['metadata-display'])
 : '';
 
+$exhibit = get_current_record('exhibit');
+ $exhibitUrl = exhibit_builder_exhibit_uri($exhibit);
+ $exhibitUrll = $exhibitUrl . "item/";
+
 ?>
 <?php if ($showcaseFile): ?>
     <div class="gallery-showcase <?php echo $showcasePosition; ?> with-<?php echo $galleryPosition; ?>">
@@ -28,6 +32,86 @@ $showMetadata = isset($options['metadata-display'])
     </div>
 <?php endif; ?>
 <div class="gallery <?php if ($showcaseFile) echo "with-showcase $galleryPosition"; ?>">
+
+<script type="text/javascript">
+
+       jQuery(document).ready(function() {
+            /*
+             *  Simple image gallery. Uses default settings
+             */
+
+
+
+          /*
+             *  Button helper. Disable animations, hide close button, change title type and content
+             */
+
+            jQuery('.fancybox').fancybox({
+                openEffect  : 'none',
+                closeEffect : 'none',
+
+                prevEffect : 'none',
+                nextEffect : 'none',
+
+                closeBtn  : true,
+
+                keys : {
+                    next : {
+                        34 : 'up',   // page down
+                        39 : 'left', // right arrow
+                        40 : 'up'    // down arrow
+                    },
+                    prev : {
+                        8  : 'right',  // backspace
+                        33 : 'down',   // page up
+                        37 : 'right',  // left arrow
+                        38 : 'down'    // up arrow
+                    },
+                    close  : [27], // escape key
+                    play   : [32], // space - start/stop slideshow
+                    toggle : [70]  // letter "f" - toggle fullscreen
+                },
+
+                helpers : {
+                    title : {
+                        type : 'inside'
+                    },
+                    buttons : {}
+                },
+
+                beforeShow : function() {
+                    var alt = this.element.find('img').attr('alt');                    
+                    this.inner.find('img').attr('alt', alt);
+                                  
+                },
+
+                afterShow: function(){
+                    jQuery('.fancybox-next').focus();
+                },
+
+                afterLoad : function() {          
+                  
+                    
+                    var itemHref = <?php echo '"' . $exhibitUrl . '"'; ?> + "/item/" + this.element.parent().parent().find('div.item-file').attr('item-id');
+                    var itemTitle = '<h3>' + this.element.parent().find('img').attr('title') + '</h2>';
+                    var itemLink = '<a href="' + itemHref + '" target="_blank">View more information about this item (opens in new window).</a>';
+                    var itemCount = '<span class="item-count">Item ' + (this.index + 1) + ' of ' + this.group.length + '</span>';
+                    this.title = itemCount + "<br>" + itemTitle + itemLink ;               
+                    
+                 },
+
+                 afterClose: function() {
+                        jQuery(this.element).focus();
+                    }
+
+            });
+
+
+
+
+        });
+
+</script>
     <div style="text-align:left;"><?php echo $this->shortcodes($text); ?>
     </div>
     <?php $counter = 0; ?>
@@ -44,6 +128,9 @@ $showMetadata = isset($options['metadata-display'])
                 <div class="exhibit-item exhibit-gallery-item" style=<?php echo '"width:' . $width . '"' ;?>>
                     <?php if (metadata($item, 'has thumbnail')): ?>
                        <?php 
+
+                       $itemID = metadata($item, 'id');
+
                        if (metadata($file, 'MIME Type') == 'application/pdf' && $size == 'fullsize' && $width != "N/A" && !isMobile()) {
                             echo file_markup($file);
                        } else {
@@ -62,6 +149,7 @@ $showMetadata = isset($options['metadata-display'])
 
                             $fileOptions['imgAttributes']['alt'] = "Thumbnail for the first (or only) page of $title.";
                             $fileOptions['imgAttributes']['title'] = $title;
+
                             $fileOptions['imageSize'] = $size;
                             $fileOptions['linkAttributes']['href'] = file_display_url($file,'fullsize');
                             $fileOptions['linkAttributes']['alt'] = "View more information about $title.";
@@ -69,7 +157,7 @@ $showMetadata = isset($options['metadata-display'])
                             $fileOptions['linkAttributes']['data-lightbox'] = "lightbox-gallery";
 
                             $image = file_image($size, $fileOptions['imgAttributes'], $file);
-                            $html = "<div class='item-file'>". exhibit_builder_link_to_exhibit_item($image, array('alt' => 'View more information about this item.'), $item) . "</div>";
+                            $html = "<div class='item-file' item-id='$itemID'>". exhibit_builder_link_to_exhibit_item($image, array('alt' => 'View a larger image.', 'class' => 'fancybox download-file', 'data-fancybox-group' => 'gallery'), $item) . "</div>";
                             // $html = "<div class=\"item-file\"><a href=\"" . file_display_url($file,'fullsize') . "\" alt=\"View more information about this item.\" data-lightbox=\"lightbox-gallery\" class=\"exhibit-item-link\">" .$image."</a></div>";
                             echo $html;
                         }
@@ -88,9 +176,7 @@ $showMetadata = isset($options['metadata-display'])
                         if (!empty($showMetadata)) {
                            
                             if (in_array("show-title", $showMetadata)) { 
-                                echo "<div class='exhibit-item-title'><a href="
-                                .exhibit_builder_exhibit_item_uri($item)." alt='Link to individual item page.' title='View more information about this item.' data-lightbox='lightbox'>".metadata($item, array("Dublin Core", "Title"), 
-                                    array('snippet'=>100))."</a></div>"; 
+                                echo "<div class='exhibit-item-title' item-id='$itemID'>" . exhibit_builder_link_to_exhibit_item($title, array('alt' => 'View a larger image.', 'class' => 'fancybox', 'data-fancybox-group' => 'gallery'), $item) . "</div>"; 
                             }                   
                             if (in_array("show-date", $showMetadata) && is_null(metadata($item, array("Dublin Core", "Date"))) == false) { 
                                 echo "<div class='exhibit-item-date'>("
@@ -127,6 +213,8 @@ if ($counter % 4 == 0 && $attachment != end($attachments)): ?>
 <?php endforeach; ?>
 <?php endif; ?>
 </div>
+
+
 <!-- </div> -->
 
 

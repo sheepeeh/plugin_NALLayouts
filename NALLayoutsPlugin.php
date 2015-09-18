@@ -9,8 +9,10 @@ class NALLayoutsPlugin extends Omeka_Plugin_AbstractPlugin
 
    public function hookExhibitBuilderPageHead($args) {
             if (array_key_exists('nal-imggal', $args['layouts'])) {
-                queue_js_file('lightbox.min', 'javascripts/lightbox');
-                queue_css_file('lightbox');
+                queue_js_file('jquery.fancybox.pack', 'javascripts/fancybox/source');
+                queue_js_file('jquery.fancybox-thumbs', 'javascripts/fancybox/source/helpers');
+                queue_js_file('jquery.fancybox-buttons', 'javascripts/fancybox/source/helpers');
+                queue_css_file(array('jquery.fancybox','jquery.fancybox-thumbs','jquery.fancybox-buttons'));
             }
     
     }
@@ -22,7 +24,7 @@ class NALLayoutsPlugin extends Omeka_Plugin_AbstractPlugin
         $item = get_record_by_id('Item', $itemID);
         $files = $item->getFile();
 
-        $html = str_replace($matches[0], "href=\"" . file_display_url($files, 'fullsize') . '" data-lightbox="lightbox-gallery"', $html);
+        $html = str_replace($matches[0], "href=\"" . file_display_url($files, 'fullsize') . '" ', $html);
         return $html;
     }
 
