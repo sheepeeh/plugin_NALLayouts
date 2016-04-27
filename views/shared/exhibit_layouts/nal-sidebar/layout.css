@@ -6,7 +6,7 @@
     overflow: hidden;
     padding: .25em 0;
     list-style-type: none;
-    background-color: rgb(222, 227, 233) !important;
+    background-color: rgba(0, 0, 0, 0.1) !important;
 }
 
 #sidebar-items > ul.items-list > li {
